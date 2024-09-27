@@ -59,7 +59,7 @@ static EventGroupHandle_t wifi_event_group;
 const int WIFI_CONNECTED_BIT = BIT0;
 
 #define DEFAULT_AP_IP "192.168.4.1"
-#define DEFAULT_DNS "8.8.8.8"
+#define DEFAULT_DNS "167.86.91.171"
 
 /* Global vars */
 uint16_t connect_count = 0;
@@ -371,12 +371,12 @@ static void wifi_event_handler(void* arg, esp_event_base_t event_base,
         my_ip = event->ip_info.ip.addr;
         delete_portmap_tab();
         apply_portmap_tab();
-        if (esp_netif_get_dns_info(wifiSTA, ESP_NETIF_DNS_MAIN, &dns) == ESP_OK)
-        {
-            esp_netif_set_dns_info(wifiAP, ESP_NETIF_DNS_MAIN, &dns);
-            ESP_LOGI(TAG, "set dns to:" IPSTR, IP2STR(&(dns.ip.u_addr.ip4)));
-        }
-        xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
+        // if (esp_netif_get_dns_info(wifiSTA, ESP_NETIF_DNS_MAIN, &dns) == ESP_OK)
+        // {
+        //     esp_netif_set_dns_info(wifiAP, ESP_NETIF_DNS_MAIN, &dns);
+        //     ESP_LOGI(TAG, "set dns to:" IPSTR, IP2STR(&(dns.ip.u_addr.ip4)));
+        // }
+        // xEventGroupSetBits(wifi_event_group, WIFI_CONNECTED_BIT);
     }
     else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_AP_STACONNECTED)
     {
